@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -16,7 +15,6 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
   const isActive = (value: string | Array<ActiveElement>) =>
     (activeElement && activeElement.value === value) ||
     (Array.isArray(value) && value.some((val) => val?.value === activeElement?.value));
-
   return (
     <nav className="flex select-none items-center justify-between gap-4 bg-primary-black px-5 text-white">
       <Image src="/assets/logo.svg" alt="FigPro Logo" width={58} height={20} />
@@ -26,6 +24,7 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
           <li
             key={item.name}
             onClick={() => {
+              
               if (Array.isArray(item.value)) return;
               handleActiveElement(item);
             }}
