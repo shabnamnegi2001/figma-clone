@@ -30,6 +30,8 @@ export const initializeFabric = ({
     height: canvasElement?.clientHeight,
   });
 
+  canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+
   // set canvas reference to fabricRef so we can use it later anywhere outside canvas listener
   fabricRef.current = canvas;
 
