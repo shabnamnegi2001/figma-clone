@@ -9,7 +9,11 @@ import useInterval from "@/hooks/useInterval";
 import { Point } from "fabric";
 import { Timestamp } from "@liveblocks/react-comments/primitives";
 
-const Live = () => {
+type Props = {
+  canvasRef :React.MutableRefObject<HTMLCanvasElement | null>
+}
+
+const Live = ({canvasRef}: Props) => {
     const others = useOthers();
      const [{cursor}, updateMyPresence] = useMyPresence() as any;
 
@@ -157,6 +161,7 @@ const Live = () => {
 
   return (
     <div
+    id="canvas"
     onPointerMove={handlePointerMove}
     onPointerLeave={handlePointerLeave}
     onPointerUp={handlePointerUp}
@@ -164,8 +169,8 @@ const Live = () => {
     className="h-[100vh] w-full flex justify-center 
     items-center text-center "
     >
-      <h1 className="text-2xl text-white">Liveblocks Figma Clone</h1>
 
+      <canvas ref={canvasRef}/>
      
      {reactions.map((r) => (
       <FlyingReaction

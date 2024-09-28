@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -123,7 +122,6 @@ export const NewThread = ({ children }: Props) => {
     }
 
     const handlePointerDown = (e: PointerEvent) => {
-
       // if composer is already placed, don't do anything
       if (allowComposerRef.current) {
         return;
@@ -144,7 +142,7 @@ export const NewThread = ({ children }: Props) => {
     };
 
     document.documentElement.addEventListener("pointerdown", handlePointerDown);
-   
+    document.documentElement.addEventListener("contextmenu", handleContextMenu);
 
     return () => {
       document.documentElement.removeEventListener(
@@ -176,7 +174,6 @@ export const NewThread = ({ children }: Props) => {
       const { top, left } = overlayPanel.getBoundingClientRect();
       const x = composerCoords.x - left;
       const y = composerCoords.y - top;
-      
 
       // create a new thread with the composer coords and cursor selectors
       createThread({

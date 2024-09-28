@@ -1,4 +1,4 @@
-import { fabric } from "fabric";
+import  * as fabric from "fabric";
 import { v4 as uuid4 } from "uuid";
 
 import {
@@ -24,7 +24,6 @@ export const initializeFabric = ({
 }) => {
   // get canvas element
   const canvasElement = document.getElementById("canvas");
-
   // create fabric canvas
   const canvas = new fabric.Canvas(canvasRef.current, {
     width: canvasElement?.clientWidth,
@@ -64,6 +63,7 @@ export const handleCanvasMouseDown = ({
     isDrawing.current = true;
     canvas.isDrawingMode = true;
     canvas.freeDrawingBrush.width = 5;
+    
     return;
   }
 
