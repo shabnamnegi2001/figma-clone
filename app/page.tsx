@@ -6,7 +6,7 @@ import Live from "@/components/Live";
 import Navbar from "@/components/Navbar";
 import RightSidebar from "@/components/RightSidebar";
 import { useEffect, useRef, useState } from "react";
-import { handleCanvaseMouseMove, handleCanvasMouseDown, handleCanvasMouseUp, handleResize, initializeFabric } from "@/lib/canvas";
+import { handleCanvaseMouseMove, handleCanvasMouseDown, handleCanvasMouseUp, handleResize, initializeFabric, renderCanvas } from "@/lib/canvas";
 import { ActiveElement } from "@/types/type";
 import { useMutation, useStorage } from "@liveblocks/react";
 
@@ -64,10 +64,6 @@ useEffect(() => {
       selectedShapeRef,
       syncShapeInStorage
     })
-
-  window.addEventListener("resize", ()=> {
-    handleResize({fabricRef})
-  }) 
   })
 
   canvas.on("mouse:move", (options) => {
@@ -96,7 +92,19 @@ useEffect(() => {
 
   })
 
+  window.addEventListener("resize", ()=> {
+    handleResize({fabricRef})
+  }) 
+
 }, [])  
+
+useEffect(() => {
+  renderCanvas({ 
+    fabricRef, 
+    canvasObjects, 
+    activeObjectRef 
+  })
+}, [canvasObjects])
 
   return (
   <main className="h-screen overflow-hidden">
