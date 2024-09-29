@@ -1,6 +1,8 @@
 "use client"; 
 
-import  * as fabric from "fabric";
+// import  * as fabric from "fabric";
+import { fabric } from "fabric";
+
 import LeftSidebar from "@/components/LeftSidebar";
 import Live from "@/components/Live";
 import Navbar from "@/components/Navbar";
