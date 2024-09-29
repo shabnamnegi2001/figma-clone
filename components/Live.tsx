@@ -170,7 +170,7 @@ const Live = ({canvasRef}: Props) => {
     items-center text-center "
     >
 
-      <canvas ref={canvasRef}/>
+      <canvas ref={canvasRef} />
      
      {reactions.map((r) => (
       <FlyingReaction
