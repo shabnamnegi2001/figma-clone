@@ -1,3 +1,27 @@
+// "use client";
+
+// import { useThreads } from "@liveblocks/react/suspense";
+// import { Composer, Thread } from "@liveblocks/react-ui";
+
+// export function CollaborativeApp() {
+//   const { threads } = useThreads();
+
+//   return (
+//     <div>
+//       {threads.map((thread) => (
+//         <Thread key={thread.id} thread={thread} />
+//       ))}
+//       <Composer />
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
 "use client";
 
 import { useCallback, useRef } from "react";
@@ -6,7 +30,7 @@ import { ThreadData } from "@liveblocks/client";
 import { ThreadMetadata, useEditThreadMetadata, useThreads, useUser } from "@/liveblocks.config";
 import { useMaxZIndex } from "@/lib/useMaxZIndex";
 
-import { PinnedThread } from "./PinnedThread";
+import { PinnedThread } from "./PinnedThread"; 
 
 type OverlayThreadProps = {
   thread: ThreadData<ThreadMetadata>;

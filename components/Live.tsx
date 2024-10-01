@@ -8,6 +8,7 @@ import FlyingReaction from "./reaction/FlyingReaction";
 import useInterval from "@/hooks/useInterval";
 import { Point } from "fabric";
 import { Timestamp } from "@liveblocks/react-comments/primitives";
+import { Comments } from "./comments/Comments";
 
 type Props = {
   canvasRef :React.MutableRefObject<HTMLCanvasElement | null>
@@ -200,6 +201,8 @@ const Live = ({canvasRef}: Props) => {
 
 
       <LiveCursors others={others} />
+
+      <Comments /> 
     </div>
   )
 }
