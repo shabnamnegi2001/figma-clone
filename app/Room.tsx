@@ -7,7 +7,7 @@ import {
   ClientSideSuspense,
 } from "@liveblocks/react/suspense";
 import { LiveMap } from "@liveblocks/client";
-import Loader from "@/components/users/Loader";
+import Loader from "@/new_components/Loader";
 
 export function Room({ children }: { children: ReactNode }) {
   return (
