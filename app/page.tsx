@@ -8,13 +8,13 @@ import Live from "@/components/Live";
 import Navbar from "@/components/Navbar";
 import RightSidebar from "@/components/RightSidebar";
 import { useEffect, useRef, useState } from "react";
-import { handleCanvaseMouseMove, handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasObjectModified, handleCanvasSelectionCreated, handleResize, initializeFabric, renderCanvas, handleCanvasObjectScaling } from "@/lib/canvas";
+import { handleCanvaseMouseMove, handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasObjectModified, handleCanvasSelectionCreated, handleResize, initializeFabric, renderCanvas, handleCanvasObjectScaling, handlePathCreated } from "@/lib/canvas";
 import { ActiveElement, Attributes } from "@/types/type";
 import { useMutation, useRedo, useStorage, useUndo } from "@liveblocks/react";
 import { defaultNavElement } from "@/constants";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
 import { handleImageUpload } from "@/lib/shapes";
-
+ 
 
 
 export default function Page() {
@@ -182,6 +182,12 @@ useEffect(() => {
     })
   })  
 
+  canvas.on("path:created", (options:any) => {
+    handlePathCreated({
+      options, syncShapeInStorage
+    })
+  }) 
+
   window.addEventListener("resize", ()=> {
     handleResize({fabricRef})
   }) 
@@ -228,9 +234,9 @@ useEffect(() => {
       }}
       />
 
-      <section className="flex h-full flex-row">
+      <section className="flex h-full flex-row ">
         <LeftSidebar allShapes={Array.from(canvasObjects || [])}/>
-        <Live canvasRef={canvasRef}/>
+        <Live canvasRef={canvasRef} undo={undo} redo={redo}/>
         <RightSidebar 
         elementAttributes={elementAttributes}
         setElementAttributes={setElementAttributes}

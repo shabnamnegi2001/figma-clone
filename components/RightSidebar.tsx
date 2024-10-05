@@ -1,8 +1,8 @@
 import { modifyShape } from '@/lib/shapes'
-import Color from '@/new_components/settings/Color'
-import Dimensions from '@/new_components/settings/Dimensions'
-import Export from '@/new_components/settings/Export'
-import Text from '@/new_components/settings/Text'
+import Color from '@/components/settings/Color'
+import Dimensions from '@/components/settings/Dimensions'
+import Export from '@/components/settings/Export'
+import Text from '@/components/settings/Text'
 import { RightSidebarProps } from '@/types/type'
 import React, { useRef } from 'react'
 
