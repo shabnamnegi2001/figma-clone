@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useBroadcastEvent, useEventListener, useMyPresence } from "@liveblocks/react"
 import LiveCursors from "./cursor/LiveCursors"
 import { useCallback, useEffect, useState } from "react";

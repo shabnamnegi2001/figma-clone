@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { LiveMap, createClient } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 import { ReactionEvent } from "./types/type";

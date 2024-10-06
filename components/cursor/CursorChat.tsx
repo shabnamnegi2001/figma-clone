@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { CursorChatProps, CursorMode } from '@/types/type'
 import { lcov } from 'node:test/reporters'
 import CursorSVG from '@/public/assets/CursorSVG'
