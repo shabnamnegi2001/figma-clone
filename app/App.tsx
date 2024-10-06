@@ -26,7 +26,7 @@ export default function Page() {
   const isDrawing = useRef(false);
   const shapeRef = useRef<fabric.Object | null>(null);
   const selectedShapeRef = useRef<string | null>(null)
-  const activeObjectRef = useRef<fabric.FabricObject()| null>(null);
+  const activeObjectRef = useRef<fabric.FabricObject| null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const isEditingRef = useRef(false);
 
