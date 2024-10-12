@@ -41,7 +41,8 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
                 handleActiveElement={handleActiveElement}
                 handleImageUpload={handleImageUpload}
               />
-            ) : item?.value === "comments" ? (
+            ) :
+             item?.value === "comments" ? (
               // If value is comments, trigger the NewThread component
               <NewThread>
                 <Button className="relative w-5 h-5 object-contain">

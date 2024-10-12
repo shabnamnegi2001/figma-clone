@@ -57,6 +57,8 @@ export type Attributes = {
   fontWeight: string;
   fill: string;
   stroke: string;
+  rx:string;
+  ry:string;
 };
 
 export type ActiveElement = {

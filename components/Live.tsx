@@ -143,6 +143,7 @@ const Live = ({canvasRef, undo, redo}: Props) => {
           setCursorState({
             mode: CursorMode.ReactionSelector
           })
+          
         }
       }
 

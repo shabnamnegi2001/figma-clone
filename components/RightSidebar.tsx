@@ -5,6 +5,7 @@ import Export from '@/components/settings/Export'
 import Text from '@/components/settings/Text'
 import { RightSidebarProps } from '@/types/type'
 import React, { useRef } from 'react'
+import BorderRadius from './settings/BorderRadius'
 
 const RightSidebar = ({
   elementAttributes,
@@ -16,7 +17,7 @@ const RightSidebar = ({
 }:RightSidebarProps) => {
   const colorInputRef= useRef(null);
   const strokeInputRef = useRef(null);
-  
+                      
 
   const handleInputChange = (property: string, value:string) => {
     if(!isEditingRef.current) isEditingRef.current=true
@@ -72,6 +73,13 @@ const RightSidebar = ({
      placeholder='stroke'
      handleInputChange={handleInputChange}
     />
+    <BorderRadius 
+    rx={elementAttributes.rx}
+    ry={elementAttributes.ry}
+    handleInputChange={handleInputChange}
+    isEditingRef={isEditingRef}
+    />
+    
     <Export />
     </section>
   )

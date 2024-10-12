@@ -8,7 +8,7 @@ import Live from "@/components/Live";
 import Navbar from "@/components/Navbar";
 import RightSidebar from "@/components/RightSidebar";
 import { useEffect, useRef, useState } from "react";
-import { handleCanvaseMouseMove, handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasObjectModified, handleCanvasSelectionCreated, handleResize, initializeFabric, renderCanvas, handleCanvasObjectScaling, handlePathCreated } from "@/lib/canvas";
+import { handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasObjectModified, handleCanvasSelectionCreated, handleResize, initializeFabric, renderCanvas, handleCanvasObjectScaling, handlePathCreated, handleCanvaseMouseMove } from "@/lib/canvas";
 import { ActiveElement, Attributes } from "@/types/type";
 import { useMutation, useRedo, useStorage, useUndo } from "@liveblocks/react";
 import { defaultNavElement } from "@/constants";
@@ -41,7 +41,8 @@ const [elementAttributes, setElementAttributes] = useState<Attributes>({
   fontWeight:'',
   fill:'#aabbcc',
   stroke:'#aabbcc',
-
+  rx: '0',
+  ry:'0'
 })
 
 const syncShapeInStorage = useMutation(({storage},
@@ -96,7 +97,7 @@ object) => {
         setActiveElement(defaultNavElement)
         break;
 
-       case 'delete':
+       case 'delete': 
         handleDelete(fabricRef.current as any, 
         deleteShapeFromStorage)
         setActiveElement(defaultNavElement )
@@ -155,7 +156,7 @@ useEffect(() => {
       selectedShapeRef,
       syncShapeInStorage,
       setActiveElement,
-      activeObjectRef
+      activeObjectRef,
     })
 
   })
@@ -249,3 +250,5 @@ useEffect(() => {
     </main>
   );
 }  
+
+

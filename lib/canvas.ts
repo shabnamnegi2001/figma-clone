@@ -1,4 +1,4 @@
-// import  * as fabric from "fabric";
+// @ts-nocheck
 import { fabric } from "fabric";
 
 import { v4 as uuid4 } from "uuid";
@@ -15,6 +15,7 @@ import {
 } from "@/types/type";
 import { defaultNavElement } from "@/constants";
 import { createSpecificShape } from "./shapes";
+import { Target } from "lucide-react";
 
 // initialize fabric canvas
 export const initializeFabric = ({
@@ -67,18 +68,13 @@ export const handleCanvasMouseDown = ({
     isDrawing.current = true;
     canvas.isDrawingMode = true;
     canvas.freeDrawingBrush.width = 5;
-    
     return;
   }
 
   canvas.isDrawingMode = false;
 
   // if target is the selected shape or active selection, set isDrawing to false
-  if (
-    target &&
-    (target.type === selectedShapeRef.current ||
-      target.type === "activeSelection")
-  ) {
+  if (target) {
     isDrawing.current = false;
 
     // set active object to target
@@ -89,6 +85,7 @@ export const handleCanvasMouseDown = ({
      * setCoords: http://fabricjs.com/docs/fabric.Object.html#setCoords
      */
     target.setCoords();
+    return;
   } else {
     isDrawing.current = true;
 
@@ -97,7 +94,6 @@ export const handleCanvasMouseDown = ({
       selectedShapeRef.current,
       pointer as any
     );
-
     // if shapeRef is not null, add it to canvas
     if (shapeRef.current) {
       // add: http://fabricjs.com/docs/fabric.Canvas.html#add
@@ -176,6 +172,7 @@ export const handleCanvaseMouseMove = ({
 
 // handle mouse up event on canvas to stop drawing shapes
 export const handleCanvasMouseUp = ({
+  options,
   canvas,
   isDrawing,
   shapeRef,
@@ -189,11 +186,12 @@ export const handleCanvasMouseUp = ({
 
   // sync shape in storage as drawing is stopped
   syncShapeInStorage(shapeRef.current);
+  
 
   // set everything to null
-  shapeRef.current = null;
-  activeObjectRef.current = null;
-  selectedShapeRef.current = null;
+  // shapeRef.current = null;
+  // activeObjectRef.current = null;
+  // selectedShapeRef.current = null;
 
   // if canvas is not in drawing mode, set active element to default nav element after 700ms
   if (!canvas.isDrawingMode) {

@@ -105,10 +105,10 @@ export const handleKeyDown = ({
     handlePaste(canvas, syncShapeInStorage);
   }
 
-  // Check if the key pressed is delete/backspace (delete)
-  // if (e.keyCode === 8 || e.keyCode === 46) {
-  //   handleDelete(canvas, deleteShapeFromStorage);
-  // }
+  // Check if the key pressed is delete (delete)
+  if (e.keyCode === 46) {
+    handleDelete(canvas, deleteShapeFromStorage);
+  }
 
   // check if the key pressed is ctrl/cmd + x (cut)
   if ((e?.ctrlKey || e?.metaKey) && e.keyCode === 88) {
