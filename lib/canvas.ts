@@ -89,6 +89,7 @@ export const handleCanvasMouseDown = ({
   } else {
     isDrawing.current = true;
 
+    
     // create custom fabric object/shape and set it to shapeRef
     shapeRef.current = createSpecificShape(
       selectedShapeRef.current,
@@ -99,6 +100,7 @@ export const handleCanvasMouseDown = ({
       // add: http://fabricjs.com/docs/fabric.Canvas.html#add
       canvas.add(shapeRef.current);
     }
+    
   }
 };
 
@@ -189,16 +191,16 @@ export const handleCanvasMouseUp = ({
   
 
   // set everything to null
-  // shapeRef.current = null;
-  // activeObjectRef.current = null;
+  shapeRef.current = null;
+  activeObjectRef.current = null;
   // selectedShapeRef.current = null;
 
   // if canvas is not in drawing mode, set active element to default nav element after 700ms
-  if (!canvas.isDrawingMode) {
-    setTimeout(() => {
-      setActiveElement(defaultNavElement);
-    }, 700);
-  }
+  // if (!canvas.isDrawingMode) {
+  //   setTimeout(() => {
+  //     setActiveElement(defaultNavElement);
+  //   }, 700);
+  // }
 };
 
 // update shape in storage when object is modified
@@ -210,7 +212,7 @@ export const handleCanvasObjectModified = ({
   if (!target) return;
 
   if (target?.type == "activeSelection") {
-    // fix this
+  //handle this     
   } else {
     syncShapeInStorage(target);
   }
@@ -309,6 +311,8 @@ export const handleCanvasSelectionCreated = ({
       fontFamily: selectedElement?.fontFamily || "",
       // @ts-ignore
       fontWeight: selectedElement?.fontWeight || "",
+      rx: selectedElement?.rx || 0,
+      ry:selectedElement?.ry || 0
     });
   }
 };
@@ -317,9 +321,9 @@ export const handleCanvasSelectionCreated = ({
 export const handleCanvasObjectScaling = ({
   options,
   setElementAttributes,
+  syncShapeInStorage
 }: CanvasObjectScaling) => {
   const selectedElement = options.target;
-
   // calculate scaled dimensions of the object
   const scaledWidth = selectedElement?.scaleX
     ? selectedElement?.width! * selectedElement?.scaleX
@@ -334,6 +338,7 @@ export const handleCanvasObjectScaling = ({
     width: scaledWidth?.toFixed(0).toString() || "",
     height: scaledHeight?.toFixed(0).toString() || "",
   }));
+  
 };
 
 // render canvas objects coming from storage on canvas
@@ -341,6 +346,7 @@ export const renderCanvas = ({
   fabricRef,
   canvasObjects,
   activeObjectRef,
+  activePage,
 }: RenderCanvas) => {
   // clear canvas
   fabricRef.current?.clear();
@@ -348,6 +354,8 @@ export const renderCanvas = ({
   if(canvasObjects===null){
     return;
   }
+  
+  
   // render all objects on canvas
   Array.from(canvasObjects, ([objectId, objectData]) => {
     /**
@@ -363,14 +371,17 @@ export const renderCanvas = ({
       [objectData],
       (enlivenedObjects: fabric.Object[]) => {
         enlivenedObjects.forEach((enlivenedObj) => {
+          if (objectData.page === activePage) {
           // if element is active, keep it in active state so that it can be edited further
           if (activeObjectRef.current?.objectId === objectId) {
             fabricRef.current?.setActiveObject(enlivenedObj);
+            synC
           }
 
           // add object to canvas
           fabricRef.current?.add(enlivenedObj);
-        });
+        }
+      });
       },
       /**
        * specify namespace of the object for fabric to render it on canvas

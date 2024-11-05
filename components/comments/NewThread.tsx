@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 "use client";
 
 import {
@@ -25,7 +25,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const NewThread = ({ children }: Props) => {
+export const NewThread = ({ children , activePage}) => {
   // set state to track if we're placing a new comment or not
   const [creatingCommentState, setCreatingCommentState] = useState<
     "placing" | "placed" | "complete"
@@ -186,14 +186,16 @@ export const NewThread = ({ children }: Props) => {
           y,
           resolved: false,
           zIndex: maxZIndex + 1,
-        },
+          pageId: activePage.current
+        }
       });
 
+      
       setComposerCoords(null);
       setCreatingCommentState("complete");
       setAllowUseComposer(false);
     },
-    [createThread, composerCoords, maxZIndex]
+    [createThread, composerCoords, maxZIndex, activePage]
   );
 
   return (

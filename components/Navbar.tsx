@@ -1,7 +1,8 @@
+// @ts-nocheck
 "use client";
 
 import Image from "next/image";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
 import { navElements } from "@/constants";
 import { ActiveElement, NavbarProps } from "@/types/type";
@@ -11,7 +12,7 @@ import ShapesMenu from "../components/ShapesMenu";
 import ActiveUsers from "./users/ActiveUsers";
 import { NewThread } from "../components/comments/NewThread";
 
-const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveElement }: NavbarProps) => {
+const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveElement, activePage }: NavbarProps) => {
   const isActive = (value: string | Array<ActiveElement>) =>
     (activeElement && activeElement.value === value) ||
     (Array.isArray(value) && value.some((val) => val?.value === activeElement?.value));
@@ -44,7 +45,7 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
             ) :
              item?.value === "comments" ? (
               // If value is comments, trigger the NewThread component
-              <NewThread>
+              <NewThread activePage={activePage}>
                 <Button className="relative w-5 h-5 object-contain">
                   <Image
                     src={item.icon}

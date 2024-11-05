@@ -24,9 +24,10 @@ type Props = {
   canvasRef :React.MutableRefObject<HTMLCanvasElement | null>
   undo: () => void;
   redo: () => void;
+  activePage: string;
 }
 
-const Live = ({canvasRef, undo, redo}: Props) => {
+const Live = ({canvasRef, undo, redo, activePage}: Props) => {
      const [{cursor}, updateMyPresence] = useMyPresence();
 
     const [cursorState, setCursorState] = useState<CursorState>({
@@ -243,7 +244,7 @@ const Live = ({canvasRef, undo, redo}: Props) => {
 
       <LiveCursors />
 
-      <Comments /> 
+      <Comments activePage={activePage} /> 
     
     </ContextMenuTrigger>
 

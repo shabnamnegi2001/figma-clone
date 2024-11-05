@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 "use client";
 
 import { useCallback, useRef } from "react";
@@ -15,7 +15,7 @@ type OverlayThreadProps = {
   maxZIndex: number;
 };
 
-export const CommentsOverlay = () => {
+export const CommentsOverlay = ({activePage}) => {
   /**
    * We're using the useThreads hook to get the list of threads
    * in the room.
@@ -23,14 +23,13 @@ export const CommentsOverlay = () => {
    * useThreads: https://liveblocks.io/docs/api-reference/liveblocks-react#useThreads
    */
   const { threads } = useThreads();
-
   // get the max z-index of a thread
   const maxZIndex = useMaxZIndex();
 
   return (
     <div>
       {threads
-        .filter((thread) => !thread.metadata.resolved)
+        .filter((thread) => !thread.metadata.resolved && thread.metadata.pageId === activePage) 
         .map((thread) => (
           <OverlayThread key={thread.id} thread={thread} maxZIndex={maxZIndex} />
         ))}

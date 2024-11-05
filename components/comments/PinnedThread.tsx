@@ -62,7 +62,7 @@ export const PinnedThread = ({ thread, onFocus, ...props }: Props) => {
           />
         </div>
         {!minimized ? (
-          <div className='flex min-w-60 flex-col overflow-hidden rounded-lg bg-white text-sm shadow'>
+          <div className='flex min-w-60 flex-col overflow-hidden rounded-lg bg-white text-sm shadow '>
             <Thread
               thread={thread}
               indentCommentContent={false}

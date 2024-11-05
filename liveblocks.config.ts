@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { LiveMap, createClient } from "@liveblocks/client";
+import { LiveList, LiveMap, createClient } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 import { ReactionEvent } from "./types/type";
 
@@ -20,11 +20,16 @@ export type Presence = {
 // Room, even after all users leave. Fields under Storage typically are
 // LiveList, LiveMap, LiveObject instances, for which updates are
 // automatically persisted and synced to all connected clients.
+
 type Storage = {
   // author: LiveObject<{ firstName: string, lastName: string }>,
   // ...
   canvasObjects: LiveMap<string, any>;
+
+  canvasPages: LiveMap<string, any>
 };
+
+
 
 // Optionally, UserMeta represents static/readonly metadata on each user, as
 // provided by your own custom auth back end (if used). Useful for data that
