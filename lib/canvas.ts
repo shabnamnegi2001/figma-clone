@@ -375,7 +375,6 @@ export const renderCanvas = ({
           // if element is active, keep it in active state so that it can be edited further
           if (activeObjectRef.current?.objectId === objectId) {
             fabricRef.current?.setActiveObject(enlivenedObj);
-            synC
           }
 
           // add object to canvas

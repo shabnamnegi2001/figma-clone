@@ -139,10 +139,18 @@ let sortedPages = Array.from(canvasPages, ([pageId, page ]) => {
   const deleteShapeFromStorage = useMutation(({
     storage }, objectId) => {
     const canvasObjects = storage.get('canvasObjects');
-
+  
     canvasObjects.delete(objectId);
   }, [])
 
+  const deletePageFromStorage = useMutation(({
+    storage}, pageId) => {
+      const canvasPages = storage.get('canvasPages')
+      console.log('page is deleted');
+      canvasPages.delete(pageId);
+      setActivePage()
+  }, [])
+  
   const handleActiveElement = (elem: ActiveElement) => {
     setActiveElement(elem);
 
@@ -151,7 +159,7 @@ let sortedPages = Array.from(canvasPages, ([pageId, page ]) => {
         deleteAllShapes();
         deleteAllPages();
         fabricRef.current?.clear();
-        setActiveElement(defaultNavElement)
+        setActiveElement(defaultNavElement);
         break;
 
        case 'delete': 
@@ -293,7 +301,7 @@ useEffect(() => {
       />
 
       <section className="flex h-full flex-row ">
-        <LeftSidebar allShapes={Array.from(canvasObjects || [])} activePage={activePage} setActivePage={setActivePage} pages={pages} addPage={addPage} />
+        <LeftSidebar allShapes={Array.from(canvasObjects || [])} activePage={activePage} setActivePage={setActivePage} pages={pages} addPage={addPage} deletePageFromStorage={deletePageFromStorage} />
         <Live canvasRef={canvasRef} undo={undo} redo={redo} activePage={activePage}/>
         <RightSidebar 
         elementAttributes={elementAttributes}
