@@ -80,14 +80,25 @@ const syncShapeInStorage = useMutation(({storage},
     },[canvasPages] )
   
 
-    const [pages, setPages] = useState([{pageId : '0' ,label :'page 0'}]);
+  //   const [pages, setPages] = useState([{pageId : '0' ,label :'page 0'}]);
 
-  const addPage = () => {
-    setPages((prev) => {
-     syncPageInStorage({pageId : `${prev.length}` ,label :`page ${prev.length}`}); 
-      return [...prev, {pageId : `${prev.length}` ,label :`page ${prev.length}`}];
-      })
-  }
+  // const addPage = () => {
+  //   setPages((prev) => {
+  //    syncPageInStorage({pageId : `${prev.length}` ,label :`page ${prev.length}`}); 
+  //     return [...prev, {pageId : `${prev.length}` ,label :`page ${prev.length}`}];
+  //     })
+  // }
+
+const [pages, setPages] = useState([{pageId :`${Date.now()}` ,label :'page 0'}]);
+const index = useRef(1);
+const addPage = () => {
+  
+  setPages((prev) => {
+   syncPageInStorage({pageId : `${Date.now()}` ,label : `page ${index.current }`}); 
+    return [...prev, {pageId : `${Date.now()}` ,label : `page ${index.current }`}];
+    })
+    index.current += 1;
+}
 
   useEffect(() => {
     if(!canvasPages) return;
@@ -148,7 +159,7 @@ let sortedPages = Array.from(canvasPages, ([pageId, page ]) => {
       const canvasPages = storage.get('canvasPages')
       console.log('page is deleted');
       canvasPages.delete(pageId);
-      setActivePage()
+      setActivePage();
   }, [])
   
   const handleActiveElement = (elem: ActiveElement) => {

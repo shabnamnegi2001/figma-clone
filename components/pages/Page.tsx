@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React, { useEffect } from 'react'
 
 export default function Page({page, onPageSelect, activePage, deletePageFromStorage}) {
-  const isActive = (value: string) =>
+  const isActive = (value: string) => 
     (activePage && activePage === value);  
 
   useEffect(()=> {
