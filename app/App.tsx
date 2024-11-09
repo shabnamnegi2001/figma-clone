@@ -94,10 +94,18 @@ const index = useRef(1);
 const addPage = () => {
   
   setPages((prev) => {
-   syncPageInStorage({pageId : `${Date.now()}` ,label : `page ${index.current }`}); 
-    return [...prev, {pageId : `${Date.now()}` ,label : `page ${index.current }`}];
+    let temp_array=prev?.filter(value=>/^page \d/.test(value.label)).sort((a, b) => (parseInt(a.pageId) - parseInt(b.pageId)))
+    let next_index;
+    let last_page  =   temp_array.at(-1)
+   
+    if(last_page)
+      next_index=  parseInt(last_page['label'].split(' ')[1]) + 1  
+    else
+      next_index=0;  
+    let id = Date.now()
+    syncPageInStorage({pageId : `${id}` ,label : `page ${next_index}`});
+    return [...prev, {pageId : `${id}` ,label : `page ${next_index}`}];
     })
-    index.current += 1;
 }
 
   useEffect(() => {
