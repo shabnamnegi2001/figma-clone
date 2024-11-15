@@ -1,7 +1,8 @@
+//@ts-nocheck
 import React, { useState } from 'react'
 import Page from './Page';
 
-export default function PageList({activePage, setActivePage, pages ,addPage, deletePageFromStorage,}) {
+export default function PageList({activePage, setActivePage, pages ,addPage, deletePageFromStorage,  deletePageShapeFromStorage }) {
 
   return (
     <div>
@@ -13,7 +14,7 @@ export default function PageList({activePage, setActivePage, pages ,addPage, del
     {
         pages.map((page) => {
             return (
-             <Page key={page} page={page} activePage={activePage} deletePageFromStorage={deletePageFromStorage} onPageSelect={() => setActivePage(page.label)}
+             <Page key={page.pageId} page={page} activePage={activePage} deletePageFromStorage={deletePageFromStorage}  onPageSelect={() => setActivePage(page.label)}
               /> 
                 )
         })

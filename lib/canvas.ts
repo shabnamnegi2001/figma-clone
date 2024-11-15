@@ -349,6 +349,7 @@ export const renderCanvas = ({
   activePage,
 }: RenderCanvas) => {
   // clear canvas
+
   fabricRef.current?.clear();
 
   if(canvasObjects===null){

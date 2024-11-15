@@ -18,7 +18,7 @@ export default function Page({page, onPageSelect, activePage, deletePageFromStor
 
     <span>{page.label}</span>
       
-    <button onClick={(e) => {e.stopPropagation(); deletePageFromStorage(page.pageId); }}
+    <button onClick={(e) => {e.stopPropagation(); deletePageFromStorage(page); }}
     // onClick={deletePageFromStorage(page.pageId)}
        className="text-xs flex justify-center bg-primary-grey-300 text-primary-black h-4 w-4 rounded-xl" >x</button>
         

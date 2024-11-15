@@ -39,7 +39,6 @@ const canvasPages = useStorage((root) => root.
 canvasPages)
 
 useEffect(()=> {
-  console.log(activePage);
   activePageRef.current = activePage;
 }, [activePage], canvasPages)
 
@@ -72,7 +71,7 @@ const syncShapeInStorage = useMutation(({storage},
     object) => {
       if (!object) return;
 
-      console.log(`object name here is : ${object}`)
+      console.log(`object name here is : ${object}`);
       // const shapeData = object.toJSON();
       const {pageId} = object;
       const canvasPages = storage.get('canvasPages');
@@ -90,11 +89,11 @@ const syncShapeInStorage = useMutation(({storage},
   // }
 
 const [pages, setPages] = useState([{pageId :`${Date.now()}` ,label :'page 0'}]);
-const index = useRef(1);
+// const index = useRef(1);
 const addPage = () => {
   
   setPages((prev) => {
-    let temp_array=prev?.filter(value=>/^page \d/.test(value.label)).sort((a, b) => (parseInt(a.pageId) - parseInt(b.pageId)))
+    let temp_array=prev?.filter(value=>/^page \d/.test(value.label)).sort((a, b) => (parseInt(a.pageId) - parseInt(b.pageId)));
     let next_index;
     let last_page  =   temp_array.at(-1)
    
@@ -115,10 +114,22 @@ let sortedPages = Array.from(canvasPages, ([pageId, page ]) => {
   return page;
     }).sort((a, b) => (parseInt(a.pageId) - parseInt(b.pageId)) ); 
 
+
   setPages(() =>
-  [...sortedPages]
-  )  
-      
+    [...sortedPages]
+    )
+
+  if(!sortedPages.length){
+    addPage();
+  }
+  
+  else{
+    if(!sortedPages.find((val) => val.label == activePage))
+      setActivePage(sortedPages[0].label)
+  }
+   
+  
+
   }, [canvasPages])
 
   const [activeElement, setActiveElement] =  useState<ActiveElement>({
@@ -163,11 +174,20 @@ let sortedPages = Array.from(canvasPages, ([pageId, page ]) => {
   }, [])
 
   const deletePageFromStorage = useMutation(({
-    storage}, pageId) => {
+    storage}, page) => {
+      const canvasObjects = storage.get('canvasObjects')
       const canvasPages = storage.get('canvasPages')
       console.log('page is deleted');
-      canvasPages.delete(pageId);
-      setActivePage();
+      canvasPages.delete(page.pageId);
+
+      Array.from(canvasObjects || [], ([objectId, objectData]) => {
+        
+        if(objectData.page == page.label){
+          deleteShapeFromStorage(objectId)
+        }
+      })
+     
+
   }, [])
   
   const handleActiveElement = (elem: ActiveElement) => {

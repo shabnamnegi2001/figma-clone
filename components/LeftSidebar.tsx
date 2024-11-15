@@ -15,7 +15,7 @@ const LeftSidebar = ({ allShapes , activePage, setActivePage, pages, addPage, de
        h-full max-sm:hidden select-none overflow-y-auto pb-20">
      
      <div className="flex flex-col" >
-        <PageList activePage={activePage} setActivePage = {setActivePage} pages={pages} addPage={addPage} deletePageFromStorage={deletePageFromStorage}/>
+        <PageList activePage={activePage} setActivePage = {setActivePage} pages={pages} addPage={addPage} deletePageFromStorage={deletePageFromStorage} />
      </div>
         
         <h3 className="border border-primary-grey-200 px-5 py-4 text-xs uppercase">Layers</h3>
